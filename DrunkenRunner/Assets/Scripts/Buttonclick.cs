@@ -1,18 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Buttonclick : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    public Image bild;
+    public void scale()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        bild.enabled = !bild.enabled;
     }
 }
