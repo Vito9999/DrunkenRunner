@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Swipe : MonoBehaviour
 {
+    public static GameObject CurrInstance;
+    [SerializeField]
     private bool tap, swipeLeft, swipeRight, swipeUp,  swipeDown;
     private bool isDraging = true;
     private Vector2 startTouch, swipeDelta;
 
     private void Update()
     {
-        tap = swipeLeft = swipeRight = swipeUp = swipeDown;
+        tap = swipeLeft = swipeRight = swipeUp = swipeDown = false;
 
         #region Standalone Inputs
         if(Input.GetMouseButtonDown(0))
@@ -66,7 +69,8 @@ public class Swipe : MonoBehaviour
                 if (x < 0)
                     swipeLeft = true;
                 else
-                    swipeRight = true;
+                   swipeRight = true;
+
             }
             else
             {
@@ -79,15 +83,30 @@ public class Swipe : MonoBehaviour
             Reset();
         }
     }
+    public void MCMovement()
+    {
+        if(SceneManager.GetActiveScene().name == "Gamescene")
+        {
+            if(swipeDown ==  true)
+            {
+
+            }
+        }
+    }
 
     private void Reset()
     {
         startTouch = swipeDelta = Vector2.zero;
     }
-
     public Vector2 SwipeDelta { get { return swipeDelta; } }
     public Vector2 StartTouch { get { return startTouch; } }
-    public bool SwipeLeft { get { return swipeLeft; } }
+    public bool SwipeLeft
+    {
+        get
+        {
+            return swipeLeft;
+        }
+    }
     public bool SwipeRight { get { return swipeRight; } }
     public bool SwipeUp { get { return swipeUp; } }
     public bool SwipeDown { get { return swipeDown; } }
