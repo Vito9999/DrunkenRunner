@@ -18,7 +18,6 @@ public class Actor_SO : ScriptableObject
 public class Charakter_SO : Actor_SO
 {
     
-    public int LVL;
     public int LiverBase;
     public int HeartBase;
     public int BowelBase;

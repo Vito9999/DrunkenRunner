@@ -26,7 +26,6 @@ public class Actor : MonoBehaviour
 
     private void Awake()
     {
-        INIT();
     }
 
 }
