@@ -205,7 +205,6 @@ GameObject:
   - component: {fileID: 136275699}
   - component: {fileID: 136275701}
   - component: {fileID: 136275700}
-  - component: {fileID: 136275702}
   m_Layer: 5
   m_Name: Player
   m_TagString: Untagged
@@ -269,21 +268,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 136275698}
   m_CullTransparentMesh: 0
---- !u!114 &136275702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 136275698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a650ebc0f314b6e4d96e938207f977c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  test: {fileID: 0}
-  Player: {fileID: 136275698}
-  PlayField_GO: {fileID: 602756927}
 --- !u!1 &433148165
 GameObject:
   m_ObjectHideFlags: 0
@@ -1919,6 +1903,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2120249452}
   - component: {fileID: 2120249453}
+  - component: {fileID: 2120249454}
   m_Layer: 5
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -1962,3 +1947,17 @@ MonoBehaviour:
   swipeRight: 0
   swipeUp: 0
   swipeDown: 0
+--- !u!114 &2120249454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120249451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4e258024e482dc43b8b2668f12150b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 136275698}
+  PlayField_GO: {fileID: 602756927}
