@@ -11,6 +11,8 @@ public class GameData : MonoBehaviour
     private void Awake()
     {
         CharakterScaleStandard = 10;
+        bool test = Resources.Load<ScriptableObject>("new Actor");
+            Debug.Log(test);
     }
 
 }
