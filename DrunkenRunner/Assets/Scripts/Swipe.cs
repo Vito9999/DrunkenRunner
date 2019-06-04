@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum SwipeType
+{
+    Left, Right, Down, Up, DownRight, DownLeft, UpRight, UpLeft
+}
+
 public class Swipe : MonoBehaviour
 {
-    public enum SwipeType
-    {
-        Left,Right,Down,Up,DownRight,DownLeft,UpRight,UpLeft
-    }
+
+    
     public static GameObject CurrInstance;
     [SerializeField]
     private bool tap, swipeLeft, swipeRight, swipeUp,  swipeDown;
@@ -32,38 +35,7 @@ public class Swipe : MonoBehaviour
         else if (Input.GetMouseButtonUp(0))
         {
             isDraging = false;
-            if (Mathf.Abs(swipeDelta.normalized.x) > 0.9)
-            {
-
-                if (Mathf.Sign(swipeDelta.x) > 0) MCMovement(SwipeType.Right);
-                else MCMovement(SwipeType.Left);
-
-            }
-            else if (Mathf.Abs(swipeDelta.normalized.y) > 0.9)
-            {
-                if (Mathf.Sign(swipeDelta.y) > 0) MCMovement(SwipeType.Up); // swipe up
-                else MCMovement(SwipeType.Down); // swipe down
-            }
-            else
-            {
-                // diagonal:
-                if (Mathf.Sign(swipeDelta.x) > 0)
-                {
-
-                    if (Mathf.Sign(swipeDelta.y) > 0) MCMovement(SwipeType.UpRight); // swipe diagonal up-right
-                    else MCMovement(SwipeType.DownRight); // swipe diagonal down-right
-
-                }
-                else
-                {
-
-                    if (Mathf.Sign(swipeDelta.y) > 0) MCMovement(SwipeType.UpLeft); // swipe diagonal up-left
-                    else MCMovement(SwipeType.DownLeft); // swipe diagonal down-left
-
-                }
-            }
-
-            Reset();
+            SwipeRecognition(CurrScene.GameScene);
         }
         #endregion
 
@@ -84,6 +56,7 @@ public class Swipe : MonoBehaviour
         }
         #endregion
 
+
         //Calculate the distance
         swipeDelta = Vector2.zero;
         if (isDraging == true)
@@ -93,40 +66,197 @@ public class Swipe : MonoBehaviour
             else if (Input.GetMouseButton(0))
             { swipeDelta = (Vector2)Input.mousePosition - startTouch; }
         }
+
+
     }
-    public void MCMovement(SwipeType swipe)
+
+
+    public void SwipeRecognition(CurrScene currScene)
     {
-        if(SceneManager.GetActiveScene().name == "Gamescene")
+       switch(currScene)
         {
+            case CurrScene.GameScene:
+                if (Mathf.Abs(swipeDelta.normalized.x) > 0.9)
+                {
+
+                    if (Mathf.Sign(swipeDelta.x) > 0) SwipeControl(SwipeType.Right);
+                    else SwipeControl(SwipeType.Left);
+
+                }
+                else if (Mathf.Abs(swipeDelta.normalized.y) > 0.9)
+                {
+                    if (Mathf.Sign(swipeDelta.y) > 0) SwipeControl(SwipeType.Up); // swipe up
+                    else SwipeControl(SwipeType.Down); // swipe down
+                }
+                else
+                {
+                    // diagonal:
+                    if (Mathf.Sign(swipeDelta.x) > 0)
+                    {
+
+                        if (Mathf.Sign(swipeDelta.y) > 0) SwipeControl(SwipeType.UpRight); // swipe diagonal up-right
+                        else SwipeControl(SwipeType.DownRight); // swipe diagonal down-right
+
+                    }
+                    else
+                    {
+
+                        if (Mathf.Sign(swipeDelta.y) > 0) SwipeControl(SwipeType.UpLeft); // swipe diagonal up-left
+                        else SwipeControl(SwipeType.DownLeft); // swipe diagonal down-left
+
+                    }
+                }
+                Reset();
+                break;
+        }        
+    }
+
+    public void SwipeControl(SwipeType swipe)
+    {
             switch(swipe)
             {
                 case SwipeType.Down:
                     Debug.Log("Down");
-                  
+                  if(GameMangaerScript.GameManger.GetComponent<GameMangaerScript>().currScene == CurrScene.GameScene)
+                  {
+                    MoveOnPlayField(SwipeType.Down);
+                  }
                     break;
                 case SwipeType.Up:
-                    Debug.Log("Up");
-                    break;
+                if (GameMangaerScript.GameManger.GetComponent<GameMangaerScript>().currScene == CurrScene.GameScene)
+                {
+                    MoveOnPlayField(SwipeType.Up);
+                }
+                break;
                 case SwipeType.Left:
-                    Debug.Log("Left");
-                    break;
+                if (GameMangaerScript.GameManger.GetComponent<GameMangaerScript>().currScene == CurrScene.GameScene)
+                {
+                    MoveOnPlayField(SwipeType.Left);
+                }
+                break;
                 case SwipeType.Right:
-                    Debug.Log("Right");
-                    break;
+                if (GameMangaerScript.GameManger.GetComponent<GameMangaerScript>().currScene == CurrScene.GameScene)
+                {
+                    MoveOnPlayField(SwipeType.Right);
+                }
+                break;
                 case SwipeType.DownLeft:
-                    Debug.Log("DownLeft");
-                    break;
+                if (GameMangaerScript.GameManger.GetComponent<GameMangaerScript>().currScene == CurrScene.GameScene)
+                {
+                    MoveOnPlayField(SwipeType.DownLeft);
+                }
+                break;
                 case SwipeType.DownRight:
-                    Debug.Log("DownRight");
-                    break;
+                if (GameMangaerScript.GameManger.GetComponent<GameMangaerScript>().currScene == CurrScene.GameScene)
+                {
+                    MoveOnPlayField(SwipeType.DownRight);
+                }
+                break;
                 case SwipeType.UpLeft:
-                    Debug.Log("UpLeft");
-                    break;
+                if (GameMangaerScript.GameManger.GetComponent<GameMangaerScript>().currScene == CurrScene.GameScene)
+                {
+                    MoveOnPlayField(SwipeType.UpLeft);
+                }
+                break;
                 case SwipeType.UpRight:
-                    Debug.Log("UpRight");
-                    break;
+                if (GameMangaerScript.GameManger.GetComponent<GameMangaerScript>().currScene == CurrScene.GameScene)
+                {
+                    MoveOnPlayField(SwipeType.UpRight);
+                }
+                break;
             }
+    }
+
+    public void MoveOnPlayField(SwipeType swipe)
+    {
+        //Debug.Log(Player.Player_GO.transform);
+
+        int x = Player.Player_GO.GetComponent<Player>().x;
+        int y = Player.Player_GO.GetComponent<Player>().y;
+        GameObject [,] PlayField = GameMangaerScript.GameManger.GetComponent<GameMangaerScript>().PlayfieldArray;
+        int PlayFieldX = GameMangaerScript.GameManger.GetComponent<GameMangaerScript>().PlayFieldArrayX;
+        int PlayFieldY = GameMangaerScript.GameManger.GetComponent<GameMangaerScript>().PlayFieldArrayY;
+        
+        switch (swipe)
+        {
+            case SwipeType.Down:
+                if(y+1 < PlayFieldY)
+                {
+                    y++;
+                    Player.Player_GO.GetComponent<Player>().y++;
+                    Player.Player_GO.transform.SetParent(PlayField[y,x].transform);
+                    Player.Player_GO.transform.position = Player.Player_GO.transform.parent.position;
+                }
+                break;
+            case SwipeType.Up:
+                if (y - 1 >= 0)
+                {
+                    y--;
+                    Player.Player_GO.GetComponent<Player>().y--;
+                    Player.Player_GO.transform.SetParent(PlayField[y, x].transform);
+                    Player.Player_GO.transform.position = Player.Player_GO.transform.parent.position;
+                }
+                break;
+            case SwipeType.Left:
+                if (x - 1 >= 0)
+                {
+                    x--;
+                    Player.Player_GO.GetComponent<Player>().x--;
+                    Player.Player_GO.transform.SetParent(PlayField[y, x].transform);
+                    Player.Player_GO.transform.position = Player.Player_GO.transform.parent.position;
+                }
+                break;
+            case SwipeType.Right:
+                if (x + 1 < PlayFieldX)
+                {
+                    x++;
+                    Player.Player_GO.GetComponent<Player>().x++;
+                    Player.Player_GO.transform.SetParent(PlayField[y, x].transform);
+                    Player.Player_GO.transform.position = Player.Player_GO.transform.parent.position;
+                }
+                break;
+            case SwipeType.DownLeft:
+                if (y + 1 < PlayFieldY && x - 1 >= 0)
+                {
+                    y++; x--;
+                    Player.Player_GO.GetComponent<Player>().y++;
+                    Player.Player_GO.GetComponent<Player>().x--;
+                    Player.Player_GO.transform.SetParent(PlayField[y, x].transform);
+                    Player.Player_GO.transform.position = Player.Player_GO.transform.parent.position;
+                }
+                break;
+            case SwipeType.DownRight:
+                if (y + 1 < PlayFieldY && x + 1 < PlayFieldX)
+                {
+                    y++; x++;
+                    Player.Player_GO.GetComponent<Player>().y++;
+                    Player.Player_GO.GetComponent<Player>().x++;
+                    Player.Player_GO.transform.SetParent(PlayField[y, x].transform);
+                    Player.Player_GO.transform.position = Player.Player_GO.transform.parent.position;
+                }
+                break;
+            case SwipeType.UpLeft:
+                if (y - 1 >= 0 && x - 1 >= 0)
+                {
+                    y--; x--;
+                    Player.Player_GO.GetComponent<Player>().y--;
+                    Player.Player_GO.GetComponent<Player>().x--;
+                    Player.Player_GO.transform.SetParent(PlayField[y, x].transform);
+                    Player.Player_GO.transform.position = Player.Player_GO.transform.parent.position;
+                }
+                break;
+            case SwipeType.UpRight:
+                if (y - 1 >= 0 && x + 1 < PlayFieldX)
+                {
+                    y--; x++;
+                    Player.Player_GO.GetComponent<Player>().y--;
+                    Player.Player_GO.GetComponent<Player>().x++;
+                    Player.Player_GO.transform.SetParent(PlayField[y, x].transform);
+                    Player.Player_GO.transform.position = Player.Player_GO.transform.parent.position;
+                }
+                break;
         }
+
     }
 
     private void Reset()

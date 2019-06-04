@@ -2,14 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum CurrScene
+{
+    GameScene, NonGame
+}
+
 public class GameMangaerScript : MonoBehaviour
 {
-    public static GameMangaerScript CurrInstance;
-    public static GameObject ThisGO;
+    public static GameObject GameManger;
     public GameObject Player;
+    public CurrScene currScene;
 
-    public GameObject[,] PlayfieldArray = new GameObject[6, 3];
-
+    public int PlayFieldArrayX = 3;
+    public int PlayFieldArrayY = 6;
+    public GameObject[,] PlayfieldArray;
     public GameObject PlayField_GO;
     public void fillPlayfield()
     {
@@ -24,10 +31,11 @@ public class GameMangaerScript : MonoBehaviour
         }
     }
 
-
     private void Awake()
-    { 
-        ThisGO = gameObject;
+    {
+        PlayfieldArray = new GameObject[PlayFieldArrayY, PlayFieldArrayX];
+        currScene = CurrScene.GameScene;
+        GameManger = gameObject;
         fillPlayfield();
     }
 }
