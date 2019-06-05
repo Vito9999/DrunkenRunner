@@ -9,6 +9,6 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Player_GO = gameObject;
-        x =2; y = 3;
+        x =0; y = 0;
     }
 }

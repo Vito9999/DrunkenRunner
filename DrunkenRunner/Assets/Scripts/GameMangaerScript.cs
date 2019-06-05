@@ -14,16 +14,16 @@ public class GameMangaerScript : MonoBehaviour
     public GameObject Player;
     public CurrScene currScene;
 
-    public int PlayFieldArrayX = 3;
-    public int PlayFieldArrayY = 6;
+    public int PlayFieldArrayX;
+    public int PlayFieldArrayY;
     public GameObject[,] PlayfieldArray;
     public GameObject PlayField_GO;
     public void fillPlayfield()
     {
         int i = 0;
-        for (int y = 0; y < 6; y++)
+        for (int y = 0; y < PlayFieldArrayY; y++)
         {
-            for (int x = 0; x < 3; x++)
+            for (int x = 0; x < PlayFieldArrayX; x++)
             {
                 PlayfieldArray[y, x] = PlayField_GO.transform.GetChild(i).gameObject;
                 i++;
@@ -33,6 +33,7 @@ public class GameMangaerScript : MonoBehaviour
 
     private void Awake()
     {
+        PlayFieldArrayX = 5; PlayFieldArrayY = 7;
         PlayfieldArray = new GameObject[PlayFieldArrayY, PlayFieldArrayX];
         currScene = CurrScene.GameScene;
         GameManger = gameObject;
